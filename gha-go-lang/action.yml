@@ -7,7 +7,6 @@ runs:
   steps:
     - name: GHA GO LANG
       id: gha_go_lang
-      shell: pwsh
       run: |
         package main
         
