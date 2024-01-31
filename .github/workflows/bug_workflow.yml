@@ -4,7 +4,7 @@ on:
     types: [opened, edited]
 
 jobs:
-  CreateRepo:
+  BugWorkflow:
     runs-on: ubuntu-latest
     
     if: github.event_name == 'issues' &&
@@ -20,6 +20,8 @@ jobs:
         
       - name: Feedback Issue
         uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         with:
           script: |
             var commentBody = "👋 @${{ github.event.issue.user.login }} Thank for rasing this up. we will look into this ASAP."
