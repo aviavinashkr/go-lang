@@ -19,9 +19,9 @@ jobs:
         uses: actions/setup-go@v4
         
       - name: Feedback Issue
-        uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        uses: actions/github-script@v6
         with:
           script: |
             var commentBody = "👋 @${{ github.event.issue.user.login }} Thank for rasing this up. we will look into this ASAP."
@@ -31,14 +31,3 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
-            
-            # await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-            #   issue_number: context.issue.number,
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   assignees: [
-            #     '${{ github.event.issue.user.login }}'
-            #   ],
-            #   state: 'closed',
-            # })   
-    
