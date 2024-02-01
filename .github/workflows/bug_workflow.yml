@@ -31,3 +31,13 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
+            
+      - name: Close issue
+        id: close_issue
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        shell: pwsh        
+        run: |
+          # Close Issue
+            cd $env:GITHUB_WORKSPACE
+            gh issue close --comment "@${{ github.event.issue.user.login }} This issue has been resloved." "${{ github.event.issue.number }}"
