@@ -9,7 +9,7 @@ jobs:
     
     if: github.event_name == 'issues' &&
       (github.event.action == 'opened' || github.event.action == 'edited') && 
-      contains(github.event.issue.title, '[Bug]')
+      contains(github.event.issue.title, '[QRCode]')
 
     steps:
       - name: Check out scripts
