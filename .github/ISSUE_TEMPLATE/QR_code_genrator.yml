@@ -24,6 +24,6 @@ body:
     attributes:
       label: URL 
       description: Please Provide URL here 👇
-      placeholder: ex. email@example.com
+      placeholder: ex. example.com
     validations:
       required: false
