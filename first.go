@@ -9,7 +9,7 @@ import (
 var test int
 
 func main() {
-	var name string = "Avinash"
+	var name string = "Avinash kumar"
 	var age int = 15
 	var phone float32 = 99.99
 	var bool bool = true
