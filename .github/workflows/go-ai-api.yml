@@ -1,0 +1,23 @@
+name: Go
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out repository'
+        uses: actions/checkout@v4
+      - name: Create Variables
+        shell: bash
+        run: |
+          curl \
+          -H 'Content-Type: application/json' \
+          -d '{"contents":[{"parts":[{"text":"Explain how AI works"}]}]}' \
+          -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${{ secrets.GEMINI_API_KEY }}'
