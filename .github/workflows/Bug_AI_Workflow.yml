@@ -57,10 +57,10 @@ jobs:
       - name: Google Gemini Action
         shell: pwsh
         run: |
-          $what-happened="${{ steps.parse_issue_json.outputs.what-happened }}"
+          $what="${{ steps.parse_issue_json.outputs.what-happened }}"
           curl \
           -H 'Content-Type: application/json' \
-          -d "{\"contents\":[{\"parts\":[{\"text\":\"$what_happened\"}]}]}" \
+          -d "{\"contents\":[{\"parts\":[{\"text\":\"$what\"}]}]}" \
           -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${{ secrets.GEMINI_API_KEY }}'
             
       - name: Close issue
