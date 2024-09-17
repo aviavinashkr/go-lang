@@ -1,4 +1,4 @@
-name: Bug Workflow
+name: Bug AI Workflow
 on:
   issues:
     types: [opened, edited]
