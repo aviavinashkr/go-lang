@@ -17,7 +17,30 @@ jobs:
 
       - name: Set up Go
         uses: actions/setup-go@v4
-        
+
+      - name: Parse Issue JSON
+        id: parse_issue_json
+        shell: pwsh        
+        run: |
+          # Parse Issue Body
+          
+          "${{ github.event.issue.body }}"
+          import-module Microsoft.PowerShell.Utility
+          $issuebody = ConvertFrom-Markdown -InputObject "${{ github.event.issue.body }}"
+          $xmlbody = ([xml]"<xml>$($issuebody.Html)</xml>").xml
+          foreach ($heading in $xmlbody.h3) {
+            $variablename = $heading.id
+            switch ($heading.NextSibling.Name) {
+              "p" {
+                $variablevalue = $heading.NextSibling.InnerText
+              }         
+              "ul" {
+                $variablevalue = ($heading.NextSibling.li | where {$_.childnodes.checked -eq 'checked'} | foreach-object {$_.'#text'.trim()}) -join ','
+              }
+            }
+            write-host "$($variablename) = $($variablevalue)"
+            Write-Output "$($variablename)=$($variablevalue)" >> $Env:GITHUB_OUTPUT
+          }
       - name: Feedback Issue
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
