@@ -57,7 +57,7 @@ jobs:
       - name: Google Gemini Action
         shell: pwsh
         run: |
-          what-happened="${{ steps.parse_issue_json.outputs.what-happened }}"
+          $what-happened="${{ steps.parse_issue_json.outputs.what-happened }}"
           curl \
           -H 'Content-Type: application/json' \
           -d "{\"contents\":[{\"parts\":[{\"text\":\"$what_happened\"}]}]}" \
