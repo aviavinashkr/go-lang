@@ -31,6 +31,13 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
+      - name: Google Gemini Action
+        shell: bash
+        run: |
+          curl \
+          -H 'Content-Type: application/json' \
+          -d '{"contents":[{"parts":[{"text":"Explain how AI works"}]}]}' \
+          -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${{ secrets.GEMINI_API_KEY }}'
             
       - name: Close issue
         id: close_issue
