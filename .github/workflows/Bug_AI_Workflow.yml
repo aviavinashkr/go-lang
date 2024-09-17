@@ -55,9 +55,9 @@ jobs:
               body: commentBody
             })
       - name: Google Gemini Action
-        shell: pwsh
+        shell: bash
         run: |
-          $what="${{ steps.parse_issue_json.outputs.what-happened }}"
+          what="${{ steps.parse_issue_json.outputs.what-happened }}"
           curl \
           -H 'Content-Type: application/json' \
           -d "{\"contents\":[{\"parts\":[{\"text\":\"$what\"}]}]}" \
